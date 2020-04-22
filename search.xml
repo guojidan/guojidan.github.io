@@ -25,6 +25,20 @@
     <url>/2020/04/22/IO/</url>
     <content><![CDATA[<a id="more"></a>
 
+<h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><h3 id="文件字节流代码"><a href="#文件字节流代码" class="headerlink" title="文件字节流代码"></a>文件字节流代码</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> teset <span class="keyword">throws</span> IOException&#123;</span><br><span class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>);</span><br><span class="line">    <span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> len;</span><br><span class="line">    <span class="keyword">while</span>((len=fis.read(buff))!=-<span class="number">1</span>)&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> String(buff,<span class="number">0</span>,len));</span><br><span class="line">    &#125;</span><br><span class="line">    fis.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> teset <span class="keyword">throws</span> IOException&#123;</span><br><span class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>);</span><br><span class="line">    BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream(fis);</span><br><span class="line">    <span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> len;</span><br><span class="line">    <span class="keyword">while</span>((len=bis.read(buff))!=-<span class="number">1</span>)&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> String(buff,<span class="number">0</span>,len));</span><br><span class="line">    &#125;</span><br><span class="line">    bis.close();</span><br><span class="line">    fis.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h2><p>​    InputStreamReader&amp;OutputStreamWriter</p>
+<p>​    以字符的形式操作字节流（纯文本），可以指定字符集</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> zhuangshi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.BufferedWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 转换流：InputStreamReader OutputStreamWriter</span></span><br><span class="line"><span class="comment"> * 1、以字符的形式操作字节流（纯文本）</span></span><br><span class="line"><span class="comment"> * 2、指定字符集</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 19485</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConvertTest01</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span>(BufferedReader isReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">			BufferedWriter isWriter = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));)&#123;</span><br><span class="line">			</span><br><span class="line">			String string = <span class="string">""</span>;</span><br><span class="line">			<span class="keyword">while</span> (!string.equals(<span class="string">"exit"</span>))&#123;</span><br><span class="line">				string = isReader.readLine();</span><br><span class="line">				isWriter.write(string,<span class="number">0</span>,string.length());</span><br><span class="line">				isWriter.newLine();</span><br><span class="line">				isWriter.flush();</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><p>​    DataOutputStream和DataInputStream    </p>
 <p>​    该IO流不仅保存数据而且还保存了数据类型，在读取的时候要保持读取和写出的顺序一致。数据流也是装饰流所以底层还是需要节点流支持。</p>
 <h4 id="2、代码演示（不完整）"><a href="#2、代码演示（不完整）" class="headerlink" title="2、代码演示（不完整）"></a>2、代码演示（不完整）</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//写出</span></span><br><span class="line">ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">DataOutputStream dos = <span class="keyword">new</span> DataOutputStream(<span class="keyword">new</span> BufferedOutputStream(baos));</span><br><span class="line"><span class="comment">//操作数据类型+数据</span></span><br><span class="line">dos.writeUTF(<span class="string">"满纸荒唐言，谁解其中味。"</span>);</span><br><span class="line">dos.writeInt(<span class="number">18</span>);</span><br><span class="line">dos.writeBoolean(<span class="keyword">false</span>);</span><br><span class="line">dos.writeChar(<span class="string">'a'</span>);</span><br><span class="line">dos.flush();</span><br><span class="line"></span><br><span class="line"><span class="keyword">byte</span>[] datas=baos.toByteArray();</span><br><span class="line"><span class="comment">//读取</span></span><br><span class="line">DataInputStream dis = <span class="keyword">new</span> DataInputStream(<span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> ByteArrayInputStream(datas)));</span><br><span class="line"><span class="comment">//顺序与写出一致</span></span><br><span class="line">String msg = dis.readUTF();</span><br><span class="line"><span class="keyword">int</span> age = dis.readInt();</span><br><span class="line"><span class="keyword">boolean</span> flag = dis.readBoolean();</span><br><span class="line"><span class="keyword">char</span> a = dis.readChar();</span><br><span class="line"></span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure>
@@ -72,6 +86,20 @@
 
 
 
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>-Java -IO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CommonsIO</title>
+    <url>/2020/04/22/CommonsIO/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<p><a href="CommonsIO/1.png" title="实例图片">示意</a></p>
 ]]></content>
       <categories>
         <category>Java</category>
